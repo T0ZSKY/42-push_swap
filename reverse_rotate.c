@@ -6,47 +6,43 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:28:45 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/27 15:36:47 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/27 22:08:56 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void rra(int *a)
+void reverse_rotate(t_stack *stack)
 {
-    int size;
-    int temp;
     int i;
+    int temp;
 
-    size = get_size(a);
-    if (size < 2)
+    if (stack->size < 2)
         return;
-    temp = a[size - 1];
-	i = size - 1;
+
+    temp = stack->data[stack->size - 1];
+    i = stack->size - 1;
     while (i > 0)
     {
-        a[i] = a[i - 1];
-		i--;
+        stack->data[i] = stack->data[i - 1];
+        i--;
     }
-    a[0] = temp;
-    ft_putstr_fd("rra\n", 1);
+
+    stack->data[0] = temp;
 }
-void rrb(int *b)
+void rra(t_stack *a)
 {
-    int size;
-    int temp;
-    int i;
-
-    size = get_size(b);
-    if (size < 2)
-        return;
-    temp = b[size - 1];
-	i = size - 1;
-    while (i > 0)
-    {
-        b[i] = b[i - 1];
-		i--;
-    }
-    b[0] = temp;
-    ft_putstr_fd("rrb\n", 1);
+    reverse_rotate(a);
+    write(1, "rra\n", 4);
+}
+void rrb(t_stack *b)
+{
+    reverse_rotate(b);
+    write(1, "rrb\n", 4);
+}
+void rrr(t_stack *a, t_stack *b)
+{
+    reverse_rotate(a);
+    reverse_rotate(b);
+    write(1, "rrr\n", 4);
 }

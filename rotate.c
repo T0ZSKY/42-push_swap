@@ -6,54 +6,45 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:12:15 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/27 15:26:14 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/27 22:05:47 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ra(int *a)
+void rotate(t_stack *stack)
 {
-    int size;
-    int temp;
     int i;
+    int temp;
 
-    size = get_size(a);
-	i = 0;
-    if (size < 2)
-        return;
-    temp = a[0];
-    while (i < size - 1)
+    if (stack->size < 2)
+        return ;
+
+    temp = stack->data[0];
+    i = 0;
+    while (i < stack->size - 1)
     {
-        a[i] = a[i + 1];
-		i++;
+        stack->data[i] = stack->data[i + 1];
+        i++;
     }
-    a[size - 1] = temp;
-    ft_putstr_fd("ra\n", 1);
+
+    stack->data[stack->size - 1] = temp;
 }
-void rb(int *b)
+void ra(t_stack *a)
 {
-    int size;
-    int temp;
-    int i;
-
-    size = get_size(b);
-	i = 0;
-    if (size < 2)
-        return;
-    temp = b[0];
-    while (i < size - 1)
-    {
-        b[i] = b[i + 1];
-		i++;
-    }
-    b[size - 1] = temp;
-    ft_putstr_fd("rb\n", 1);
+    rotate(a);
+    write(1, "ra\n", 3);
 }
 
-void	rr(int *a, int *b)
+void rb(t_stack *b)
 {
-	ft_putstr_fd("rr\n", 1);
-	ra(a);
-	rb(b);
+    rotate(b);
+    write(1, "rb\n", 3);
+}
+
+void rr(t_stack *a, t_stack *b)
+{
+    rotate(a);
+    rotate(b);
+    write(1, "rr\n", 3);
 }
