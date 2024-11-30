@@ -1,48 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   verif.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:08:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/30 16:26:44 by tomlimon         ###   ########.fr       */
+/*   Created: 2024/11/28 15:17:37 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/30 15:52:24 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *init(int size)
+void free_split(char **split_args)
 {
-    t_stack *stack;
+    int i = 0;
 
-    stack = malloc(sizeof(t_stack));
-    if (!stack)
-        return NULL;
-    
-    stack->data = malloc(sizeof(int) * size);
-    if (!stack->data)
+    while (split_args[i])
     {
-        free(stack);
-        return NULL;
+        free(split_args[i]);
+        i++;
     }
-    
-    stack->size = 0;
-    stack->max = size;  // Capacité maximale initiale
-    return stack;
+    free(split_args);
 }
 
-
-
-void free_stack(t_stack *stack)
+int verif_double(t_stack *stack)
 {
-    if (stack)
+    int i;
+    int j;
+
+    if (!stack || !stack->data)
+        return (0);
+
+    i = 0;
+    while (i < stack->size)
     {
-        if (stack->data)
+        j = i + 1;
+        while (j < stack->size)
         {
-            free(stack->data);
+            if (stack->data[i] == stack->data[j])
+                return (1);
+            j++;
         }
-        free(stack);
+        i++;
     }
+    return (0);
 }
+
 

@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:39:23 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/27 22:09:52 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/30 15:52:28 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_stack
     int size; 
     int max;
 } t_stack;
+
+
 
 
 //--------------------------swap------------------------//
@@ -56,6 +58,30 @@ void rrr(t_stack *a, t_stack *b);
 
 t_stack *init(int max);
 void free_stack(t_stack *stack);
+
+//--------------------------verif------------------------//
+
+int	verif_double(t_stack *stack);
+
+//--------------------------algo------------------------//
+
+int is_sorted(t_stack *stack);
+int find_median(t_stack *stack);
+void push_chunks_to_b(t_stack *a, t_stack *b);
+int find_min_index(t_stack *stack);
+void move_to_top(t_stack *stack, int index, char stack_name);
+void sort_three(t_stack *a);
+void sort_five(t_stack *a, t_stack *b);
+int find_best_target_in_a(t_stack *a, int value);
+void push_back_to_a(t_stack *a, t_stack *b);
+void align_stack(t_stack *a);
+void push_swap(t_stack *a, t_stack *b);
+
+void handle_single_argument(char *arg, t_stack **a);
+void free_split(char **split_args);
+
+
+
 
 
 #endif

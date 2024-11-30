@@ -6,53 +6,65 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:57:03 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/27 22:09:18 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:27:26 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int ft_multi(t_stack *a, char **argv, int argc)
+{
+    int i = 1;
+
+    while (i < argc)
+    {
+        a->data[a->size] = ft_atoi(argv[i]);
+        a->size++;
+        i++;
+    }
+    return (0);
+}
+
 int main(int argc, char **argv)
 {
     t_stack *a;
     t_stack *b;
-    int i;
+
+    a = NULL;
+    b = NULL;
     if (argc < 2)
+        return (0);
+
+    if (argc == 2) 
     {
-        write(1, "error\n", 6);
-        return (1);
+        handle_single_argument(argv[1], &a);
     }
-    a = init(argc - 1);
-    b = init(argc - 1);
-    i = 1;
-    if (!a || !b)
+    else
+    {
+        a = init(argc - 1);
+        b = init(argc - 1);
+
+        if (!a || !b)
+        {
+            write(1, "Error\n", 6); 
+            return (1);
+        }
+
+        ft_multi(a,argv, argc); 
+    }
+ 
+    if (verif_double(a) == 1)
     {
         write(1, "Error\n", 6);
+        free_stack(a);
+        free_stack(b);
         return (1);
     }
-    while(i < argc)
-    {
-        a->data[a->size] = ft_atoi(argv[i]);
-        a->size++;       
-        i++;
-    }
-    printf("Avant push\n");
-    printf("A:%d\n", a->data[0]);
-    printf("A:%d\n", a->data[1]);
-    printf("A:%d\n", a->data[2]);
-	write(1, "\n", 1);
-    printf("B:%d\n", b->data[0]);
-    printf("B:%d\n", b->data[1]);
-    printf("B:%d\n", b->data[2]);
-    rra(a);
-    printf("Apres push\n");
-    printf("A:%d\n", a->data[0]);
-    printf("A:%d\n", a->data[1]);
-    printf("A:%d\n", a->data[2]);
-	write(1, "\n", 1);
-    printf("B:%d\n", b->data[0]);
-    printf("B:%d\n", b->data[1]);
-    printf("B:%d\n", b->data[2]);
+
+    push_swap(a, b);
+
     free_stack(a);
     free_stack(b);
+
+    return (0);
 }
